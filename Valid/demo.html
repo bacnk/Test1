@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<img src="" alt="">
+	<title></title>
+	<link rel="stylesheet" href="./asset/themify-icons/themify-icons.css">
+	<style type="text/css">
+		body{
+            font-family: 'Courier New', Courier, monospace;
+            color: gray;
+            background-image: url(landscape-photography_1645.jpg);
+            background-repeat: no-repeat;
+            background-size: cover;
+            backdrop-filter: blur(5px);
+        }
+		.span_regex{
+			color: rgb(31, 18, 18);
+		}
+	</style>
+</head>
+<body>
+<form>
+	<table>
+				<h2> Validate</h2>
+			<div>
+                    <label for="name"> Họ tên đầy đủ</label>
+				<input type="text" id="name" type="text" placeholder="VD: Nguyễn Khắc Bắc">
+				<span id="span_regex_name" class="span_regex"></span>
+			</div>
+            <div>
+                <label for="username"> Tên tài khoản </label>
+				<input type="text" id="username" name="" placeholder="Namno123344">
+				<span id="span_regex_username" class="span_regex"></span>
+            </div>
+        	<div>   
+                    <label for="password">Mật khẩu:</label>
+                    <input type="password" id="password" name="" placeholder="Nonam123344@">
+                    <span id="span_regex_password" class="span_regex"></span>
+             </div>
+			<span>giới tính:</span>
+			<div>   
+				<input type="radio" name="gender" value="nam">nam
+				<input type="radio" name="gender" value="nữ">nữ
+                <input type="radio" name="gender" value="Khác">khác
+				<span id="span_regex_gender" class="span_regex"></span>
+           
+			<div>	
+				<lable for="address"> Địa chỉ</lable>
+				<input type="text" id="address" name="" placeholder="Thuận Thành - Bắc Ninh">
+				<span id="span_regex_address" class="span_regex"></span>
+			</div>
+			<div>
+				<label for="email"> Email	</label>
+				<input type="email" id="email" name="" placeholder="nguyenkhacbac1233@gmail.com">
+				<span id="span_regex_email" class="span_regex"></span>
+			</div>
+			<span> Sở thích</span>
+			<div>
+				<select>
+					<option>Học 1</option>
+					<option>Học 2</option>
+					<option>Học 3</option>
+				</select>
+			</div>
+	<input type="submit" onclick="return check_regex()" class="span_regex" name=""></td>
+		
+	</table>
+</form>
+<script type="text/javascript">
+	function check_regex() {
+		let regex_check = true;
+		let regex;
+
+		let name = document.getElementById('name').value;
+		regex = /^[AÀẢÃÁẠĂẰẲẴẮẶÂẦẨẪẤẬBCDĐEÈẺẼÉẸÊỀỂỄẾỆFGHIÌỈĨÍỊJKLMNOÒỎÕÓỌÔỒỔỖỐỘƠỜỞỠỚỢPQRSTUÙỦŨÚỤƯỪỬỮỨỰVWXYỲỶỸÝỴZ][aàảãáạăằẳẵắặâầẩẫấậbcdđeèẻẽéẹêềểễếệfghiìỉĩíịjklmnoòỏõóọôồổỗốộơờởỡớợpqrstuùủũúụưừửữứựvwxyỳỷỹýỵz]+(\ [AÀẢÃÁẠĂẰẲẴẮẶÂẦẨẪẤẬBCDĐEÈẺẼÉẸÊỀỂỄẾỆFGHIÌỈĨÍỊJKLMNOÒỎÕÓỌÔỒỔỖỐỘƠỜỞỠỚỢPQRSTUÙỦŨÚỤƯỪỬỮỨỰVWXYỲỶỸÝỴZ][aàảãáạăằẳẵắặâầẩẫấậbcdđeèẻẽéẹêềểễếệfghiìỉĩíịjklmnoòỏõóọôồổỗốộơờởỡớợpqrstuùủũúụưừửữứựvwxyỳỷỹýỵz]*)+$/;
+		if(!regex.test(name))
+		{
+			document.getElementById('span_regex_name').innerHTML = "Tên không hợp lệ! (Tên không chứa các ký tự đặc biệt )";
+			regex_check = false;
+		}
+		else
+		{
+			document.getElementById('span_regex_name').innerHTML = '';
+		}
+		
+		let username = document.getElementById('username').value;
+		regex = /^(?=.*[a-zA-Z])[\w._]{8,20}$/;
+		if(!regex.test(username))
+		{
+			document.getElementById('span_regex_username').innerHTML = "Username không hợp lệ! (dài từ 8-20 ký tự, chứa các kí tự a-z,A-Z,0-9,dấu .,dấu _ )";
+			regex_check = false;
+		}
+		else
+		{
+			document.getElementById('span_regex_username').innerHTML = '';
+		}
+		
+		let gender_array = document.getElementsByName('gender');
+		if(!(gender_array[0].checked || gender_array[1].checked))
+		{
+			document.getElementById('span_regex_gender').innerHTML = "Giới tính không được để trống!";
+			regex_check = false;
+		}
+		else
+		{
+			document.getElementById('span_regex_gender').innerHTML = '';
+		}
+		
+		let address = document.getElementById('address').value;
+		if(address.length === 0)
+		{
+			document.getElementById('span_regex_address').innerHTML = "Địa chỉ không được để trống!";
+			regex_check = false;
+		}
+		else
+		{
+			document.getElementById('span_regex_address').innerHTML = '';
+		}
+		
+		let email = document.getElementById('email').value;
+		regex = /^\w+@\w+(\.\w+)+$/;
+		if(!regex.test(email))
+		{
+			document.getElementById('span_regex_email').innerHTML = "Mail không hợp lệ!";
+			regex_check = false;
+		}
+		else
+		{
+			document.getElementById('span_regex_email').innerHTML = '';
+		}
+		
+		let password = document.getElementById('password').value;
+		regex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+		if(!regex.test(password))
+		{
+			document.getElementById('span_regex_password').innerHTML = "Mật khẩu không hợp lệ! (mật khẩu phải chứa ít nhất 8 ký tự, ít nhất 1 chữ cái thường, 1 chữ cái in hoa và 1 số)";
+			regex_check = false;
+		}
+		else
+		{
+			document.getElementById('span_regex_password').innerHTML = '';
+		}
+
+		if(regex_check)
+			return true;
+		else
+			return false;
+	}
+</script>
+</body>
+</html>
